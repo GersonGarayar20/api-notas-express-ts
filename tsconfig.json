@@ -1,0 +1,34 @@
+{
+  "extends": "ts-node/node16/tsconfig.json",
+
+  "ts-node": {
+
+    "transpileOnly": true, //solo traspilar
+    "esm": true, //aceptar esmodule
+    "files": true,
+    "swc": true,
+
+    "compilerOptions": {
+      //zod ts:
+      "strict": true,
+      //tipos para express:
+      "typeRoots" : ["./src/types", "./node_modules/@types"],
+      "module": "ES6",
+      "target": "ES5",
+    }
+  },
+
+  //tsconfig
+  "compilerOptions": {
+    //zod ts:
+    "strict": true,
+    //tipos para express:
+    "typeRoots" : ["./src/types", "./node_modules/@types"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2020",
+    "sourceMap": true,
+    "outDir": "dist",
+  },
+  "include": ["src/**/*"],
+}
