@@ -11,10 +11,12 @@ export const validateCreateNote = (
 	res: Response,
 	next: NextFunction,
 ) => {
+
 	try {
 		req.body = Note.parse(req.body);
 		next();
 	} catch (err) {
 		return res.status(404).json(err);
 	}
+	
 };

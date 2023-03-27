@@ -8,6 +8,7 @@ import { compare, hash } from "bcrypt";
 export const signin = async (req: Request, res: Response) => {
 	const { password, ...body } = req.body;
 
+	//crear un nuevo usuario
 	const user = new UserModel({
 		password: await hash(password, 10),
 		...body,
@@ -30,12 +31,12 @@ export const login = async (req: Request, res: Response) => {
 	const user = await UserModel.findOne({ email });
 
 	if (!user)
-		return res.status(404).json({ error: "contraseña o usuario incorrecto" });
+		return res.status(401).json({ error: "contraseña o usuario incorrecto" });
 
 	if (user.password) {
 		const check = await compare(password, user?.password);
 		if (!check) {
-			return res.status(404).json({ error: "contraseña o usuario incorrecto" });
+			return res.status(401).json({ error: "contraseña o usuario incorrecto" });
 		}
 	}
 

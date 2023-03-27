@@ -2,14 +2,14 @@ import { Request, Response } from "express";
 import { NoteModel } from "../models/note.model.js";
 
 //buscar todas las notas
-const findAll = (req: Request, res: Response) => {
+export const findAll = (req: Request, res: Response) => {
 	const user = req.user.id;
 
 	NoteModel.find({ user }).then((data) => res.json(data));
 };
 
 //buscar una nota
-const findOne = (req: Request, res: Response) => {
+export const findOne = (req: Request, res: Response) => {
 	const _id = req.params.id;
 	const user = req.user.id;
 
@@ -23,7 +23,7 @@ const findOne = (req: Request, res: Response) => {
 };
 
 //crear una nota
-const create = (req: Request, res: Response) => {
+export const create = (req: Request, res: Response) => {
 	const note = new NoteModel({
 		user: req.user.id,
 		...req.body,
@@ -35,7 +35,7 @@ const create = (req: Request, res: Response) => {
 };
 
 //eliminar una nota
-const remove = (req: Request, res: Response) => {
+export const remove = (req: Request, res: Response) => {
 	const _id = req.params.id;
 	const user = req.user.id;
 
@@ -49,7 +49,7 @@ const remove = (req: Request, res: Response) => {
 };
 
 //actulizar una nota
-const update = (req: Request, res: Response) => {
+export const update = (req: Request, res: Response) => {
 	const _id = req.params.id;
 	const user = req.user.id;
 
@@ -60,12 +60,4 @@ const update = (req: Request, res: Response) => {
 		.catch((err) => {
 			return res.status(404).json({ error: "no se encontro la nota" });
 		});
-};
-
-export default {
-	findAll,
-	findOne,
-	create,
-	remove,
-	update,
 };
